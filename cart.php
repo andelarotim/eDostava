@@ -98,8 +98,8 @@ include 'config.php';
             if($result){
 
               while($obj = $result->fetch_object()) {
-                $cost = $obj->price * $quantity; //work out the line cost
-                $total = $total + $cost; //add to the total cost
+                $cost = $obj->price * $quantity;
+                $total = $total + $cost;
 
                 echo '<tr>';
                 echo '<td>'.$obj->product_code.'</td>';

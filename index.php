@@ -78,7 +78,7 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
     <div class="slika">     
       <img data-interchange="[images/hamburger.jpg, (large)], [images/hamburger.jpg, (medium)]">
       <noscript><img src="images/hamburger.jpg"></noscript>
-      <div class="centriran"><span style="font-size:100px;">&copy;</span>eDostava</div>
+      <div class="centriran">eDostava</div>
     </div>
 
     <div class="row" style="margin-top:10px;">

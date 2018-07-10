@@ -73,22 +73,18 @@ include 'config.php';
         <?php
           $i=0;
           $user = $_SESSION["username"];
-          $result = $mysqli->query("SELECT * from orders where email='".$user."'");
+          $result = $mysqli->query("SELECT * from orders where email='".$user."' order by id desc");
           if($result) {
             while($obj = $result->fetch_object()) {
-              //echo '<div class="large-6">';
               if($i%2==0)
               {
                 echo '<div style="background-color:#cce6ff; padding-left:15px; border-radius:10px;">';
                 echo '<p><h4>ID Narudžbe : '.$obj->id.'</h4></p>';
                 echo '<p><strong>Datum i vrijeme narudžbe</strong>: '.$obj->date.'</p>';
                 echo '<p><strong>Naziv proizvoda</strong>: '.$obj->product_name.'</p>';
-                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.'</p>';
+                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.' '.$currency.'</p>';
                 echo '<p><strong>Količina naručenog proizvoda</strong>: '.$obj->units.'</p>';
                 echo '<p><strong>Ukupno</strong>: '.$obj->total.' '.$currency.'</p>';
-                //echo '</div>';
-                //echo '<div class="large-6">';
-                //echo '<img src="images/products/sports_band.jpg">';
                 echo '</div>';
                 echo '<p><hr></p>';
               }
@@ -98,12 +94,9 @@ include 'config.php';
                 echo '<p><h4>ID Narudžbe : '.$obj->id.'</h4></p>';
                 echo '<p><strong>Datum i vrijeme narudžbe</strong>: '.$obj->date.'</p>';
                 echo '<p><strong>Naziv proizvoda</strong>: '.$obj->product_name.'</p>';
-                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.'</p>';
+                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.' '.$currency.'</p>';
                 echo '<p><strong>Količina naručenog proizvoda</strong>: '.$obj->units.'</p>';
                 echo '<p><strong>Ukupno</strong>: '.$obj->total.' '.$currency.'</p>';
-                //echo '</div>';
-                //echo '<div class="large-6">';
-                //echo '<img src="images/products/sports_band.jpg">';
                 echo '</div>';
                 echo '<p><hr></p>';
               }

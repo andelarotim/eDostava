@@ -3,14 +3,9 @@
 //if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 if(session_id() == '' || !isset($_SESSION)){session_start();}
 
-if(!isset($_SESSION["username"])) {
-  header("location:index.php");
+if(!isset($_SESSION["username"])){
+  header("location:not_logged.php");
 }
-
-if($_SESSION["type"]!="admin") {
-  header("location:index.php");
-}
-
 include 'config.php';
 ?>
 
@@ -19,7 +14,7 @@ include 'config.php';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eDostava | Admin panel</title>
+    <title>eDostava | Narudžbe</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="icon" href="images/ed.png">
     <script src="js/vendor/modernizr.js"></script>
@@ -29,7 +24,7 @@ include 'config.php';
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">eDostava - Admin panel</a></h1>
+          <h1><a href="index.php">eDostava - Pregled svih narudžbi</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -67,45 +62,59 @@ include 'config.php';
       </section>
     </nav>
 
+
+
+
     <div class="row" style="margin-top:10px;">
       <div class="large-12">
-      <div id="adminov" style="clear:both">
-        <h3 style="float: left">Pozdrav, Admine!</h3>
-        <h4 style="float:right"><a href="admin_orders.php">Pregled svih narudžbi</a></h4>
-        </div>
-        <br><br><br>
+        <h3>Narudžbe</h3>
+        <hr>
+
         <?php
-          $result = $mysqli->query("SELECT * from products order by id asc");
+          $i=0;
+          $user = $_SESSION["username"];
+          $result = $mysqli->query("SELECT * from orders ORDER BY id DESC");
           if($result) {
             while($obj = $result->fetch_object()) {
-              echo '<div class="large-4 columns">';
-              echo '<p><h3>'.$obj->product_name.'</h3></p>';
-              echo '<img src="images/products/'.$obj->product_img_name.'"/>';
-              echo '<p><strong>Opis</strong>: '.$obj->product_desc.'</p>';
-              echo '<p><strong>Količina dostupnog proizvoda</strong>: '.$obj->qty.'</p>';
-              echo '<div class="large-6 columns" style="padding-left:0;">';
-              echo '<form method="post" name="update-quantity" action="admin-update.php">';
-              echo '<p><strong>Promijeni količinu</strong>:</p>';
-              echo '</div>';
-              echo '<div class="large-6 columns">';
-              echo '<input type="number" name="quantity[]"/>';
-
-              echo '</div>';
-              echo '</div>';
+              if($i%2==0)
+              {
+                echo '<div style="background-color:#cce6ff; padding-left:15px; border-radius:10px;">';
+                echo '<p><h4>ID Narudžbe : '.$obj->id.'</h4></p>';
+                echo '<p><strong>Email korisnika</strong>: '.$obj->email.'</p>';
+                echo '<p><strong>Datum i vrijeme narudžbe</strong>: '.$obj->date.'</p>';
+                echo '<p><strong>Naziv proizvoda</strong>: '.$obj->product_name.'</p>';
+                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.' '.$currency.'</p>';
+                echo '<p><strong>Količina naručenog proizvoda</strong>: '.$obj->units.'</p>';
+                echo '<p><strong>Ukupno</strong>: '.$obj->total.' '.$currency.'</p>';
+                echo '</div>';
+                echo '<p><hr></p>';
+              }
+              else
+              {
+                echo '<div style="background-color:#e6f3ff; padding-left:15px; border-radius:10px;">';
+                echo '<p><h4>ID Narudžbe : '.$obj->id.'</h4></p>';
+                echo '<p><strong>Email korisnika</strong>: '.$obj->email.'</p>';
+                echo '<p><strong>Datum i vrijeme narudžbe</strong>: '.$obj->date.'</p>';
+                echo '<p><strong>Naziv proizvoda</strong>: '.$obj->product_name.'</p>';
+                echo '<p><strong>Cijena proizvoda</strong>: '.$obj->price.' '.$currency.'</p>';
+                echo '<p><strong>Količina naručenog proizvoda</strong>: '.$obj->units.'</p>';
+                echo '<p><strong>Ukupno</strong>: '.$obj->total.' '.$currency.'</p>';
+                echo '</div>';
+                echo '<p><hr></p>';
+              }
+              $i++;
             }
           }
         ?>
-
-
-
       </div>
     </div>
 
 
+
+
     <div class="row" style="margin-top:10px;">
       <div class="small-12">
-        <center><p><input style="clear:both;" type="submit" class="button" value="Spremi promjene"></p></center>
-        </form>
+
         <footer style="margin-top:10px;">
            <p style="text-align:center; font-size:0.8em;">&copy; eDostava. All Rights Reserved.</p>
         </footer>

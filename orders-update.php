@@ -30,21 +30,20 @@ if(isset($_SESSION['cart'])) {
           }
         }
 
-        //send mail script
+        //slanje maila
         /*$query = $mysqli->query("SELECT * from orders order by date desc");
         if($query){
           while ($obj = $query->fetch_object()){
-            $subject = "Your Order ID ".$obj->id;
+            $subject = "Nova narudžba ".$obj->id;
             $message = "<html><body>";
-            $message .= '<p><h4>Order ID ->'.$obj->id.'</h4></p>';
-            $message .= '<p><strong>Date of Purchase</strong>: '.$obj->date.'</p>';
-            $message .= '<p><strong>Product Code</strong>: '.$obj->product_code.'</p>';
-            $message .= '<p><strong>Product Name</strong>: '.$obj->product_name.'</p>';
-            $message .= '<p><strong>Price Per Unit</strong>: '.$obj->price.'</p>';
-            $message .= '<p><strong>Units Bought</strong>: '.$obj->units.'</p>';
-            $message .= '<p><strong>Total Cost</strong>: '.$obj->total.'</p>';
+            $message .= '<p><h4>ID narudžbe->'.$obj->id.'</h4></p>';
+            $message .= '<p><strong>Datum naručivanja</strong>: '.$obj->date.'</p>';
+            $message .= '<p><strong>Naziv proizvoda</strong>: '.$obj->product_name.'</p>';
+            $message .= '<p><strong>Cijena po proizvodu</strong>: '.$obj->price.'</p>';
+            $message .= '<p><strong>Količina</strong>: '.$obj->units.'</p>';
+            $message .= '<p><strong>Ukupno</strong>: '.$obj->total.'</p>';
             $message .= "</body></html>";
-            $headers = "From: support@techbarrack.com";
+            $headers = "From: support@edostava.com";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
@@ -53,7 +52,7 @@ if(isset($_SESSION['cart'])) {
               $message = "";
             }
             else {
-              echo 'Failure';
+              echo 'Greška!';
             }
           }
         }*/

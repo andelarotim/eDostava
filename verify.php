@@ -8,7 +8,6 @@ include 'config.php';
 $username = $_POST["username"];
 $password = $_POST["pwd"];
 $flag = 'true';
-//$query = $mysqli->query("SELECT email, password from users");
 
 $result = $mysqli->query('SELECT id,email,password,fname,type from users order by id asc');
 
@@ -37,7 +36,7 @@ if($result){
 
 function redirect() {
   echo '<h1>Prijava neuspjela! Preusmjeravanje na naslovnu stranicu...</h1>';
-  header("Refresh: 3; url=index.php");
+  header("Refresh: 2; url=index.php");
 }
 
 
